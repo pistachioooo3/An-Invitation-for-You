@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>You Are Selected!</title>
+  <style>
+    :root {
+      --bg: #0b0726;
+      --paper: #fffafc;
+      --accent1: #8a4fff;
+      --accent2: #6ec8ff;
+      --accent3: #ff90d0;
+      --shadow: rgba(11,7,38,0.6);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(110,200,255,0.06), transparent 8%),
+                  radial-gradient(800px 400px at 90% 90%, rgba(255,144,208,0.04), transparent 6%),
+                  var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #eae6ff;
+      padding: 20px;
+    }
+    .stage {
+      width: 720px;
+      max-width: 92vw;
+      position: relative;
+      perspective: 1000px;
+    }
+    .card {
+      width: 100%;
+      height: 460px;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+    .envelope {
+      --w: 640px;
+      width: var(--w);
+      max-width: 100%;
+      height: 360px;
+      margin: auto;
+      position: relative;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    .back {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: linear-gradient(180deg, var(--accent1), #4b2b9f);
+      box-shadow: 0 30px 60px var(--shadow), 0 6px 20px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .back::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; top: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent 20%);
+      mix-blend-mode: overlay;
+      border-radius: 14px;
+    }
+    .seal {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--accent3), #ff67b8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35) inset, 0 12px 20px rgba(0,0,0,0.2);
+      transform: translateY(32px);
+    }
+    .flap {
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      height: 0;
+      transform-origin: 50% 24px;
+      transition: transform 600ms ease;
+      pointer-events: auto;
+    }
+    .flap .triangle {
+      width: 0; height: 0;
+      border-left: calc(var(--w)/2) solid transparent;
+      border-right: calc(var(--w)/2) solid transparent;
+      border-bottom: 140px solid var(--accent1);
+      border-radius: 0 0 12px 12px;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.45));
+    }
+    .letter {
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      transform: translateX(-50%) translateZ(40px);
+      width: 84%;
+      height: 76%;
+      background: var(--paper);
+      border-radius: 12px;
+      padding: 28px 36px;
+      box-shadow: 0 24px 50px rgba(5,4,20,0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 600ms ease, opacity 400ms ease;
+      border: 1px solid rgba(25,10,40,0.06);
+      color: #3b2b5b;
+    }
+    .letter.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(8px) translateZ(60px) rotateX(0deg);
+    }
+    .letter h1 {
+      margin-top: 0;
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.4em;
+      color: #4a297f;
+    }
+    .letter .body {
+      margin-top: 1em;
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #3c2e54;
+    }
+    .letter ul {
+      margin-left: 1.2em;
+    }
+    .letter p.signature {
+      margin-top: 1.8em;
+      font-style: italic;
+      color: #5c3b80;
+    }
+    /* Hover behavior: when envelope is hovered, open it */
+    .envelope:hover .flap {
+      transform: rotateX(-180deg);
+    }
+    .envelope:hover .letter {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(10px) translateZ(60px) rotateX(0deg);
+    }
+  </style>
+  <!-- Include a cursive Google Font if desired -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="stage">
+    <div class="card">
+      <div class="envelope" title="Hover to open">
+        <div class="flap">
+          <div class="triangle"></div>
+        </div>
+        <div class="back">
+          <div class="seal">✉️</div>
+        </div>
+        <div class="letter">
+          <h1>You are selected!</h1>
+          <div class="body">
+            <p>You are invited to be a team captain for the upcoming General Science Quiz Bee on **October 17, 2025**. See the bullets below for the steps on how to proceed in this matter:</p>
+            <ul>
+              <li>Confirm that you will join as team captain</li>
+              <li>Make your team with one person per grade level within the high school department</li>
+              <li>Prepare and enjoy this quiz bee</li>
+            </ul>
+            <p class="signature">With love, FIST Officers</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
